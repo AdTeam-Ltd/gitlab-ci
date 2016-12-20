@@ -20,7 +20,7 @@ ENV GOPATH /go
 ENV PATH $GOPATH/bin:$GOROOT/bin:$PATH
 
 RUN apt-get update
-RUN apt-get install —no-install-recommends -y -q 	
+RUN apt-get install --no-install-recommends -y -q 	
 		    ca-certificates \
 		    unzip \
 		    openssh-client \
