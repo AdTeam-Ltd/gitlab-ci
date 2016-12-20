@@ -1,5 +1,7 @@
 FROM buildpack-deps:xenial
 
+MAINTAINER Vladimir N. Dyakov v.dyakov@ad.team
+
 WORKDIR /tmp
 
 # Last packages here:
@@ -15,11 +17,15 @@ ENV RABBIT_DOWNLOAD_URL https://www.rabbitmq.com/releases/rabbitmq-server/v${RAB
 ENV GO_DOWNLOAD_URL https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz
 ENV GLIDE_DOWNLOAD_URL https://github.com/Masterminds/glide/releases/download/v$GLIDE_VERSION/glide-v${GLIDE_VERSION}-linux-amd64.zip
 
+ENV LANG en_US.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 
 ENV GOROOT /usr/local/go
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:$GOROOT/bin:$PATH
+
+RUN locale-gen en_US en_US.UTF-8
+RUN dpkg-reconfigure locales
 
 RUN apt-get update
 RUN apt-get install --no-install-recommends -y -q \
@@ -69,6 +75,7 @@ RUN curl -fsSL "${GLIDE_DOWNLOAD_URL}" -o glide.zip \
     && rm -rf linux-amd64 \
     && rm glide.zip
 
-RUN apt-get clean -qq
+RUN update-rc.d rabbitmq-server defaults
 
+RUN apt-get clean -qq
 WORKDIR /go
