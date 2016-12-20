@@ -72,4 +72,4 @@ RUN curl -fsSL "${GLIDE_DOWNLOAD_URL}" -o glide.zip \
 RUN apt-get clean -qq
 
 RUN mkdir -p "${GOPATH}/src" "${GOPATH}/bin" && chmod -R 777 "${GOPATH}" && mkdir -p /go/src/app
-WORKDIR /go/src/app
+WORKDIR /go
