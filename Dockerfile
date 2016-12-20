@@ -75,7 +75,7 @@ RUN curl -fsSL "${GLIDE_DOWNLOAD_URL}" -o glide.zip \
     && rm -rf linux-amd64 \
     && rm glide.zip
 
-RUN update-rc.d rabbitmq-server defaults
+RUN systemctl enable rabbitmq-server.service
 
 RUN apt-get clean -qq
 WORKDIR /go
