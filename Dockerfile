@@ -64,7 +64,12 @@ RUN apt-get install --no-install-recommends -y -q \
 		    logrotate \
 		    socat \
 		    software-properties-common \
-		    python-pip
+		    python-pip \
+		    ping \
+		    mtr \
+		    dnsutils \
+		    whois \
+		    tcpdump
 
 RUN apt-add-repository ppa:ansible/ansible \
     && apt-get update \
