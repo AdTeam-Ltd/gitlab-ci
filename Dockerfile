@@ -65,11 +65,13 @@ RUN apt-get install --no-install-recommends -y -q \
 		    socat \
 		    software-properties-common \
 		    python-pip \
-		    ping \
+		    fping \
 		    mtr \
 		    dnsutils \
 		    whois \
-		    tcpdump
+		    tcpdump \
+		    vim \
+		    mc
 
 RUN apt-add-repository ppa:ansible/ansible \
     && apt-get update \
