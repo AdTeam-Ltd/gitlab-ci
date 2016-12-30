@@ -63,7 +63,8 @@ RUN apt-get install --no-install-recommends -y -q \
 		    erlang-xmerl \
 		    logrotate \
 		    socat \
-		    software-properties-common
+		    software-properties-common \
+		    python-pip
 
 RUN apt-add-repository ppa:ansible/ansible \
     && apt-get update \
@@ -71,6 +72,8 @@ RUN apt-add-repository ppa:ansible/ansible \
     && apt-get install -y ansible cron \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
+
+RUN pip install ansible-lint
 
 RUN wget $RABBIT_DOWNLOAD_URL && dpkg -i rabbitmq-server_${RABBIT_VERSION}-1_all.deb && rm rabbitmq-server_${RABBIT_VERSION}-1_all.deb
 RUN wget $GO_DOWNLOAD_URL && tar -zxvf go${GO_VERSION}.linux-amd64.tar.gz -C /usr/local && rm go${GO_VERSION}.linux-amd64.tar.gz
@@ -81,7 +84,8 @@ RUN curl -fsSL "${GLIDE_DOWNLOAD_URL}" -o glide.zip \
     && rm -rf linux-amd64 \
     && rm glide.zip
 
-RUN update-rc.d rabbitmq-server defaults
+#RUN update-rc.d rabbitmq-server defaults
+RUN systemctl enable rabbitmq-server.service
 
 RUN apt-get clean -qq
 WORKDIR /go
