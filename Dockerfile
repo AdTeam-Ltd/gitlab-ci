@@ -10,7 +10,7 @@ WORKDIR /tmp
 # https://github.com/Masterminds/glide/releases
 
 ENV RABBIT_VERSION 3.6.6
-ENV GO_VERSION 1.7.4
+ENV GO_VERSION 1.8
 ENV GLIDE_VERSION 0.12.3
 
 ENV RABBIT_DOWNLOAD_URL https://www.rabbitmq.com/releases/rabbitmq-server/v${RABBIT_VERSION}/rabbitmq-server_${RABBIT_VERSION}-1_all.deb
